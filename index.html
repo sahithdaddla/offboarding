@@ -1,0 +1,1955 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Astrolite Tech Solutions - Employee Offboarding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #3498db;
+            --secondary-color: #2ecc71;
+            --background-color: #f4f6f7;
+            --text-color: #2c3e50;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            position: relative;
+        }
+
+        body::before {
+            content: 'ATS - TECH SOLUTIONS';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 5vw;
+            color: rgba(52, 152, 219, 0.05);
+            z-index: -1;
+            white-space: nowrap;
+        }
+
+        .logo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 150px;
+            height: 70px;
+            border-radius: 45%;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 20px auto;
+            /* background-color: rgba(0, 0, 0, 0); */
+            background-color: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeIn 0.5s ease-out;
+            position: relative;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+        }
+
+        h2 {
+            color: var(--primary-color);
+            /* margin-bottom: 20px; */
+            font-size: 1.4rem;
+            /* border-bottom: 2px solid var(--primary-color); */
+            padding-bottom: 10px;
+            display: inline;
+            align-items: center;
+        }
+        
+        h2 i {
+            margin-right: 0px;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        .error {
+            color: var(--error-color);
+            font-size: 0.8em;
+            margin-top: 5px;
+            display: none;
+            animation: errorShake 0.5s;
+        }
+        
+        textarea{
+            resize: none;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .error-input {
+            border-color: var(--error-color);
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .checkbox-container input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+            accent-color: var(--secondary-color);
+        }
+
+        .checkbox-container label {
+            flex-grow: 1;
+            margin-bottom: 0;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .navigation button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        #prevBtn {
+            background-color: #f1f3f4;
+            color: var(--text-color);
+        }
+
+        #nextBtn, #submitBtn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .navigation button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .file-upload {
+            border: 2px dashed #e0e0e0;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background-color: rgba(52, 152, 219, 0.05);
+            border-color: var(--primary-color);
+        }
+
+        .file-list {
+            margin-top: 15px;
+        }
+
+        .remove-file {
+            color: var(--error-color);
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .info-icon {
+            margin-left: 5px;
+            color: var(--primary-color);
+            cursor: pointer;
+            position: relative;
+            margin-top: -5px;
+        }
+
+        .tooltip {
+            visibility: hidden;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 5px 10px;
+            border-radius: 6px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            white-space: nowrap;
+        }
+
+        .info-icon:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .label-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .next-btn-container {
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+        }
+
+        .star{
+            color: var(--error-color);
+            font-size: large;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 15px;
+            }
+
+            .navigation {
+                flex-direction: column;
+            }
+
+            .navigation button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            h1 {
+                font-size: 1rem;
+                margin-top: 20px;
+                margin-left: 100px;
+
+            }
+
+            h2 {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- <img src="./Assest-wallpaper/ATS Wallpaper.jpg" alt="Astrolite Tech Solutions Logo" class="logo"> -->
+        <h1>EMPLOYEE OFFBOARDING FORM</h1>
+        <form id="offboardingForm">
+            <!-- Personal Details Section -->
+            <div class="section active" id="personal">
+                <h2><i class="fas fa-user-circle"></i> Personal Details</h2>
+                <div class="form-group">
+                    <label for="fullName">Full Name <span class="star">*</span></label>
+                    <input type="text" id="fullName" minlength="5" maxlength="50" required>
+                    <div class="error" id="fullNameError">Please enter a valid full name (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <div class="label-container">
+                        <label for="empId">Employee ID <span class="star">*</span></label>
+                        <span class="info-icon">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltip">Employee ID format: ATS0XXX</span>
+                        </span>
+                    </div>
+                    <input type="text" id="empId" minlength="7" maxlength="7" required>
+                    <div class="error" id="empIdError">Please enter a valid employee ID (ATS0XXX format).</div>
+                </div>
+                <div class="form-group">
+                    <label for="position">Role <span class="star">*</span></label>
+                    <input type="text" id="position" minlength="5" maxlength="50" required>
+                    <div class="error" id="positionError">Please enter your job position (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="department">Department <span class="star">*</span></label>
+                    <input type="text" id="department" minlength="5" maxlength="50" required>
+                    <div class="error" id="departmentError">Please enter your department (5-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="lastDay">Last Working Day <span class="star">*</span></label>
+                    <input type="date" id="lastDay" required min="">
+                    <div class="error" id="lastDayError">Please select a valid future date for your last working day</div>
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">Contact Number <span class="star">*</span></label>
+                    <input type="number" id="contactNumber" minlength="10" maxlength="10" required>
+                    <div class="error" id="contactNumberError">Please enter a valid contact number</div>
+                </div>
+                <div class="form-group">
+                    <label for="personalEmail">Personal Email <span class="star">*</span></label>
+                    <input type="email" id="personalEmail" required>
+                    <div class="error" id="personalEmailError">Please enter a valid email address</div>
+                </div>
+                <!-- Next button for personal section only (positioned on right) -->
+                <div class="next-btn-container">
+                    <button type="button" id="personalNextBtn" class="next-btn">Next <i class="fas fa-arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Project Handover Section -->
+            <div class="section" id="projects">
+                <h2><i class="fas fa-project-diagram"></i> Project Handover</h2>
+                <div class="form-group">
+                    <label for="activeProjects">Active Projects <span class="star">*</span></label>
+                    <textarea id="activeProjects" rows="4" minlength="10" maxlength="300" required></textarea>
+                    <div class="error" id="activeProjectsError">Please list your active projects (10-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="handoverPerson">Handover Person <span class="star">*</span></label>
+                    <input type="text" id="handoverPerson" minlength="5" maxlength="50" required>
+                    <div class="error" id="handoverPersonError">Please specify the handover person (3-50 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label>Project Documentation <span class="star">*</span></label>
+                    <div class="file-upload" id="projectDocUpload">
+                        <p>Drag and drop files or click to upload (Max 5 files, 5MB each)</p>
+                        <input type="file" id="projectDocs" multiple style="display:none;" required>
+                    </div>
+                    <div class="error" id="projectDocsError">Please upload at least one project documentation file.</div>
+                    <div class="file-list" id="projectDocsList"></div>
+                </div>
+            </div>
+
+            <!-- Company Assets Section -->
+            <div class="section" id="assets">
+                <h2><i class="fas fa-laptop"></i> Company Assets</h2>
+                <div class="form-group">
+                    <label>Hardware Items</label>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="laptop" name="assets">
+                        <label for="laptop">Laptop</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="monitor" name="assets">
+                        <label for="monitor">Monitor</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="phone" name="assets">
+                        <label for="phone">Company Phone</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="accessCard" name="assets">
+                        <label for="accessCard">Access Card</label>
+                    </div>
+                    <!-- <div class="checkbox-container">
+                        <input type="checkbox" id="keyboard" name="assets">
+                        <label for="keyboard">Keyboard</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="mouse" name="assets">
+                        <label for="mouse">Mouse</label>
+                    </div>
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="headphones" name="assets">
+                        <label for="headphones">Headphones</label>
+                    </div> -->
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="others" name="assets">
+                        <label for="others">Others</label>
+                    </div>
+                    <div class="error" id="assetsError">Please select at least 4 assets or specify "Others"</div>
+                </div>
+                <div class="form-group" id="additionalAssetsContainer" style="display:none;">
+                    <label for="additionalAssets">Additional Assets </label>
+                    <textarea id="additionalAssets" rows="3" minlength="10" maxlength="300"></textarea>
+                    <div class="error" id="additionalAssetsError">Please describe additional assets (10-300 characters)</div>
+                </div>
+            </div>
+
+            <!-- Documentation Section -->
+            <div class="section" id="documents">
+                <h2><i class="fas fa-file-alt"></i> Documentation</h2>
+                <div class="form-group">
+                    <label for="repositories">Code Repositories <span class="star">*</span></label>
+                    <textarea id="repositories" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="repositoriesError">Please list all code repositories (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="accessCredentials">Access Credentials <span class="star">*</span></label>
+                    <textarea id="accessCredentials" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="accessCredentialsError">Please list all access credentials (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <label for="knowledgeBase">Knowledge Base Articles <span class="star">*</span></label>
+                    <textarea id="knowledgeBase" rows="3" minlength="5" maxlength="300" required></textarea>
+                    <div class="error" id="knowledgeBaseError">Please list relevant knowledge base articles (5-300 characters)</div>
+                </div>
+                <div class="form-group">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="dataPrivacyConsent" style="margin-bottom: 50px;" required>
+                        <label for="dataPrivacyConsent">I consent to the transfer and processing of my personal information as part of the offboarding process. I understand that my data will be handled in compliance with company policies and applicable data protection regulations.</label>
+                    </div>
+                    <div class="error" id="dataPrivacyConsentError">Please provide consent to proceed</div>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="navigation">
+                <button type="button" id="prevBtn" style="display:none;"><i class="fas fa-arrow-left"></i> Previous</button>
+                <button type="button" id="nextBtn" style="display:none;">Next <i class="fas fa-arrow-right"></i></button>
+                <button type="submit" id="submitBtn" style="display:none;">Submit Offboarding</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+    const sections = ['personal', 'projects', 'assets', 'documents'];
+    let currentSectionIndex = 0;
+    let uploadedFiles = {
+        projectDocs: []
+    };
+
+    const lastDayInput = document.getElementById('lastDay');
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    
+    // Format date as YYYY-MM-DD for input[type="date"]
+    const formatDate = (date) => {
+        return date.toISOString().split('T')[0];
+    };
+    
+    lastDayInput.min = formatDate(tomorrow);
+
+    const form = document.getElementById('offboardingForm');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const personalNextBtn = document.getElementById('personalNextBtn');
+    const submitBtn = document.getElementById('submitBtn');
+    const additionalAssetsContainer = document.getElementById('additionalAssetsContainer');
+    const othersCheckbox = document.getElementById('others');
+    const assetsCheckboxes = document.querySelectorAll('input[name="assets"]');
+    const assetsError = document.getElementById('assetsError');
+
+    // Add special styling for the personal section next button
+    personalNextBtn.style.backgroundColor = 'var(--primary-color)';
+    personalNextBtn.style.color = 'white';
+    personalNextBtn.style.padding = '12px 25px';
+    personalNextBtn.style.border = 'none';
+    personalNextBtn.style.borderRadius = '8px';
+    personalNextBtn.style.cursor = 'pointer';
+    personalNextBtn.style.transition = 'all 0.3s ease';
+    personalNextBtn.style.fontWeight = '600';
+
+    // Updated validation functions to check length and specific requirements
+    const validations = {
+        // Function to count only alphabetic characters
+        countAlphabeticChars: (value) => {
+            return value.replace(/[^a-zA-Z]/g, '').length;
+        },
+
+        // Function to check if value has at least one alphabetic character
+        hasAlphabeticChar: (value) => {
+            return /[a-zA-Z]/.test(value);
+        },
+
+        fullName: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+        },
+        
+        empId: (value) => /^ATS0(?!000)\d{3}$/.test(value),
+        
+        position: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+        },
+        
+        department: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+        },
+        
+        lastDay: (value) => {
+            // Validate future date and 4-digit year
+            const selectedDate = new Date(value);
+            const today = new Date();
+            const yearMatch = /^\d{4}-\d{2}-\d{2}$/.test(value); 
+            return selectedDate > today && yearMatch;
+        },
+        
+        contactNumber: (value) => /^\d{10}$/.test(value),
+        
+        personalEmail: (value) => /^[^\s@]+@(gmail\.com|outlook\.com)$/.test(value),
+        
+        activeProjects: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 10 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+        },
+        
+        handoverPerson: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && /^[a-zA-Z\s]+$/.test(value.trim()) && validations.hasAlphabeticChar(value);
+        },
+        
+        assets: () => {
+            const checkedAssets = document.querySelectorAll('input[name="assets"]:checked');
+            const othersChecked = document.getElementById('others').checked;
+            
+            if (othersChecked) {
+                const additionalAssets = document.getElementById('additionalAssets').value.trim();
+                return additionalAssets.length >= 10 && additionalAssets.length <= 300 && validations.hasAlphabeticChar(additionalAssets);
+            }
+            
+            return checkedAssets.length >= 4;
+        },
+        
+        additionalAssets: (value) => {
+            const othersChecked = document.getElementById('others').checked;
+            return !othersChecked || (value.trim().length >= 10 && value.trim().length <= 300 && validations.hasAlphabeticChar(value));
+        },
+        
+        repositories: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+        },
+        
+        accessCredentials: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+        },
+        
+        knowledgeBase: (value) => {
+            const alphaCount = validations.countAlphabeticChars(value);
+            return alphaCount >= 5 && value.trim().length <= 300 && validations.hasAlphabeticChar(value);
+        },
+        
+        projectDocs: () => {
+            return uploadedFiles.projectDocs.length > 0;
+        },
+        
+        dataPrivacyConsent: (value) => {
+            return value === true;
+        }
+    };
+
+    // Show/hide error messages
+    function showError(inputId, show = true) {
+        const errorElement = document.getElementById(`${inputId}Error`);
+        const inputElement = document.getElementById(inputId);
+        
+        if (errorElement) {
+            errorElement.style.display = show ? 'block' : 'none';
+        }
+        
+        if (inputElement) {
+            inputElement.classList.toggle('error-input', show);
+        }
+    }
+
+    function validateAssets() {
+        const checkedAssets = document.querySelectorAll('input[name="assets"]:checked');
+        const othersChecked = document.getElementById('others').checked;
+        
+        let isValid = true;
+        
+        // Hide assets error by default
+        assetsError.style.display = 'none';
+        
+        if (!othersChecked && checkedAssets.length < 4) {
+            assetsError.style.display = 'block';
+            isValid = false;
+        }
+        
+        // If others is checked, validate additional assets
+        if (othersChecked) {
+            const additionalAssetsValue = document.getElementById('additionalAssets').value.trim();
+            const additionalAssetsValid = validations.additionalAssets(additionalAssetsValue);
+            showError('additionalAssets', !additionalAssetsValid);
+            isValid = isValid && additionalAssetsValid;
+        }
+        
+        return isValid;
+    }
+
+    assetsCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            // Validate assets when checkbox is changed
+            validateAssets();
+
+            // Toggle additional assets container for 'Others'
+            if (this.id === 'others') {
+                additionalAssetsContainer.style.display = this.checked ? 'block' : 'none';
+                
+                // Clear textarea if unchecked
+                if (!this.checked) {
+                    document.getElementById('additionalAssets').value = '';
+                }
+            }
+        });
+    });
+
+    document.getElementById('additionalAssets').addEventListener('input', validateAssets);
+
+    // Update validateSection to handle projectDocs validation
+    function validateSection(sectionId) {
+        let isValid = true;
+
+        switch(sectionId) {
+            case 'personal':
+                ['fullName', 'empId', 'position', 'department', 'lastDay', 'contactNumber', 'personalEmail'].forEach(field => {
+                    const value = document.getElementById(field).value.trim();
+                    const fieldValid = validations[field](value);
+                    showError(field, !fieldValid);
+                    isValid = isValid && fieldValid;
+                });
+                break;
+            
+            case 'projects':
+                ['activeProjects', 'handoverPerson'].forEach(field => {
+                    const value = document.getElementById(field).value.trim();
+                    const fieldValid = validations[field](value);
+                    showError(field, !fieldValid);
+                    isValid = isValid && fieldValid;
+                });
+
+                // Validate project documentation
+                const projectDocsValid = validations.projectDocs();
+                showError('projectDocs', !projectDocsValid);
+                isValid = isValid && projectDocsValid;
+                break;
+            
+            case 'assets':
+                const assetsValid = validations.assets();
+                showError('assets', !assetsValid);
+                isValid = assetsValid;
+
+                // If others is checked, validate additional assets
+                if (othersCheckbox.checked) {
+                    const additionalAssetsValue = document.getElementById('additionalAssets').value.trim();
+                    const additionalAssetsValid = validations.additionalAssets(additionalAssetsValue);
+                    showError('additionalAssets', !additionalAssetsValid);
+                    isValid = isValid && additionalAssetsValid;
+                }
+                break;
+            
+            case 'documents':
+                ['repositories', 'accessCredentials', 'knowledgeBase'].forEach(field => {
+                    const value = document.getElementById(field).value.trim();
+                    const fieldValid = validations[field](value);
+                    showError(field, !fieldValid);
+                    isValid = isValid && fieldValid;
+                });
+
+                // Validate data privacy consent
+                const dataPrivacyConsent = document.getElementById('dataPrivacyConsent').checked;
+                showError('dataPrivacyConsent', !dataPrivacyConsent);
+                isValid = isValid && dataPrivacyConsent;
+                break;
+        }
+
+        return isValid;
+    }
+
+    // Navigate to next or previous section
+    function navigateSection(direction) {
+        const currentSectionId = sections[currentSectionIndex];
+        
+        // Validate current section before moving
+        if (direction === 'next' && !validateSection(currentSectionId)) {
+            return;
+        }
+
+        // Update section visibility
+        document.getElementById(currentSectionId).classList.remove('active');
+
+        // Update index
+        currentSectionIndex += direction === 'next' ? 1 : -1;
+
+        // Show new section
+        const newSectionId = sections[currentSectionIndex];
+        document.getElementById(newSectionId).classList.add('active');
+
+        // Update button visibility
+        prevBtn.style.display = currentSectionIndex > 0 ? 'inline-block' : 'none';
+        nextBtn.style.display = currentSectionIndex < sections.length - 1 && currentSectionIndex > 0 ? 'inline-block' : 'none';
+        submitBtn.style.display = currentSectionIndex === sections.length - 1 ? 'inline-block' : 'none';
+    }
+
+    // Event listeners for navigation buttons
+    prevBtn.addEventListener('click', () => navigateSection('prev'));
+    nextBtn.addEventListener('click', () => navigateSection('next'));
+    personalNextBtn.addEventListener('click', () => navigateSection('next'));
+
+    // Others checkbox event listener
+    othersCheckbox.addEventListener('change', function() {
+        additionalAssetsContainer.style.display = this.checked ? 'block' : 'none';
+        
+        // If unchecked, clear the textarea
+        if (!this.checked) {
+            document.getElementById('additionalAssets').value = '';
+        }
+    });
+
+    // File upload handling
+    const projectDocUpload = document.getElementById('projectDocUpload');
+    const projectDocsInput = document.getElementById('projectDocs');
+    const projectDocsList = document.getElementById('projectDocsList');
+
+    projectDocUpload.addEventListener('click', () => {
+        projectDocsInput.click();
+    });
+
+    projectDocsInput.addEventListener('change', (e) => {
+        handleFileUpload(e.target.files);
+    });
+
+    projectDocUpload.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        projectDocUpload.style.backgroundColor = '#f0f0f0';
+    });
+
+    projectDocUpload.addEventListener('dragleave', (e) => {
+        e.preventDefault();
+        projectDocUpload.style.backgroundColor = 'transparent';
+    });
+
+    projectDocUpload.addEventListener('drop', (e) => {
+        e.preventDefault();
+        projectDocUpload.style.backgroundColor = 'transparent';
+        handleFileUpload(e.dataTransfer.files);
+    });
+
+    function handleFileUpload(files) {
+        Array.from(files).forEach(file => {
+            // Limit total file uploads to 5
+            if (uploadedFiles.projectDocs.length >= 5) {
+                alert('Maximum of 5 files allowed');
+                return;
+            }
+
+            // Limit file size to 5MB
+            if (file.size > 5 * 1024 * 1024) {
+                alert(`File ${file.name} exceeds 5MB limit`);
+                return;
+            }
+
+            uploadedFiles.projectDocs.push(file);
+            
+            const fileItem = document.createElement('div');
+            fileItem.innerHTML = `
+                ${file.name} (${(file.size / 1024).toFixed(2)} KB)
+                <span class="remove-file" data-filename="${file.name}">✖</span>
+            `;
+            
+            const removeBtn = fileItem.querySelector('.remove-file');
+            removeBtn.addEventListener('click', () => {
+                // Remove the file from the list
+                uploadedFiles.projectDocs = uploadedFiles.projectDocs.filter(
+                    f => f.name !== file.name
+                );
+                projectDocsList.removeChild(fileItem);
+                
+                // Re-validate if all files are removed
+                const projectDocsValid = validations.projectDocs();
+                showError('projectDocs', !projectDocsValid);
+            });
+            
+            projectDocsList.appendChild(fileItem);
+            
+            // Hide error message when files are uploaded successfully
+            if (uploadedFiles.projectDocs.length > 0) {
+                showError('projectDocs', false);
+            }
+        });
+    }
+
+    // Form submission handler
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Final validation of all sections
+        const allSectionsValid = sections.every(section => validateSection(section));
+        
+        if (allSectionsValid) {
+            // Collect form data
+            const formData = {
+                // Personal Details
+                personalInfo: {
+                    fullName: document.getElementById('fullName').value,
+                    empId: document.getElementById('empId').value,
+                    position: document.getElementById('position').value,
+                    department: document.getElementById('department').value,
+                    lastDay: document.getElementById('lastDay').value,
+                    contactNumber: document.getElementById('contactNumber').value,
+                    personalEmail: document.getElementById('personalEmail').value
+                },
+                
+                // Project Handover
+                projectDetails: {
+                    activeProjects: document.getElementById('activeProjects').value,
+                    handoverPerson: document.getElementById('handoverPerson').value,
+                    projectDocs: uploadedFiles.projectDocs.map(file => ({
+                        name: file.name,
+                        size: file.size,
+                        type: file.type
+                    }))
+                },
+                
+                // Company Assets
+                assets: {
+                    hardware: Array.from(document.querySelectorAll('input[name="assets"]:checked'))
+                        .map(checkbox => checkbox.id),
+                    additionalAssets: document.getElementById('additionalAssets').value
+                },
+                
+                // Documentation
+                documentation: {
+                    repositories: document.getElementById('repositories').value,
+                    accessCredentials: document.getElementById('accessCredentials').value,
+                    knowledgeBase: document.getElementById('knowledgeBase').value,
+                    dataPrivacyConsent: document.getElementById('dataPrivacyConsent').checked
+                },
+                
+                // Metadata
+                submissionDetails: {
+                    submissionDate: new Date().toISOString(),
+                    status: 'Pending',
+                    submissionId: `OFF-${Date.now()}`
+                }
+            };
+
+            // Store submission in localStorage
+            const submissions = JSON.parse(localStorage.getItem('offboardingSubmissions') || '[]');
+            submissions.push(formData);
+            localStorage.setItem('offboardingSubmissions', JSON.stringify(submissions));
+
+            // Generate submission confirmation
+            const confirmationMessage = `
+            Offboarding Submission Successful!
+            
+            Submission Details:
+            - Submission ID: ${formData.submissionDetails.submissionId}
+            - Employee Name: ${formData.personalInfo.fullName}
+            - Employee ID: ${formData.personalInfo.empId}
+            - Last Working Day: ${formData.personalInfo.lastDay}
+            
+            Thank you for completing the off boarding process.
+            HR will review your submission shortly.
+            `;
+
+            // Show confirmation
+            alert(confirmationMessage);
+
+            // Reset form and clear uploaded files
+            form.reset();
+            uploadedFiles.projectDocs = [];
+            document.getElementById('projectDocsList').innerHTML = '';
+            additionalAssetsContainer.style.display = 'none';
+
+            // Return to first section
+            while (currentSectionIndex > 0) {
+                navigateSection('prev');
+            }
+        } else {
+            alert('Please complete all sections correctly and ensure all required fields are filled.');
+        }
+    });
+
+    // Real-time validation for inputs
+    const validationFields = [
+        'fullName', 'empId', 'position', 'department', 'lastDay', 
+        'contactNumber', 'personalEmail', 'activeProjects', 
+        'handoverPerson', 'repositories', 'accessCredentials', 
+        'knowledgeBase', 'additionalAssets'
+    ];
+
+    validationFields.forEach(field => {
+        const input = document.getElementById(field);
+        if (input) {
+            input.addEventListener('input', () => {
+                const value = input.value.trim();
+                const isValid = validations[field](value);
+                showError(field, !isValid);
+            });
+        }
+    });
+
+    // Add event listener for data privacy consent checkbox
+    document.getElementById('dataPrivacyConsent').addEventListener('change', function() {
+        showError('dataPrivacyConsent', !this.checked);
+    });
+
+    // Additional custom validations and event listeners
+
+    // Prevent non-numeric input for contact number
+    document.getElementById('contactNumber').addEventListener('input', function(e) {
+        // Remove any non-digit characters
+        this.value = this.value.replace(/\D/g, '');
+        
+        // Limit to 10 digits
+        if (this.value.length > 10) {
+            this.value = this.value.slice(0, 10);
+        }
+    });
+
+    // Employee ID format guidance
+    document.getElementById('empId').addEventListener('input', function(e) {
+        // Ensure uppercase and specific format
+        this.value = this.value.toUpperCase();
+        
+        // Restrict to alphanumeric and limit length
+        this.value = this.value.replace(/[^A-Z0-9]/g, '').slice(0, 7);
+        
+        // Ensure it starts with ATS0
+        if (!this.value.startsWith('ATS0')) {
+            this.value = 'ATS0' + this.value.replace('ATS0', '');
+        }
+    });
+
+    // Email validation with domain restriction
+    document.getElementById('personalEmail').addEventListener('input', function(e) {
+        // Automatically convert to lowercase
+        this.value = this.value.toLowerCase();
+    });
+
+    // Text input character validation (only alphabets and spaces)
+    ['fullName', 'position', 'department', 'handoverPerson'].forEach(field => {
+        const input = document.getElementById(field);
+        input.addEventListener('input', function(e) {
+            // First remove non-alphabetic characters except spaces
+            this.value = this.value.replace(/[^a-zA-Z\s]/g, '');
+            
+            // Remove spaces if there are no alphabetic characters
+            if (!validations.hasAlphabeticChar(this.value)) {
+                this.value = this.value.replace(/\s/g, '');
+            }
+        });
+    });
+
+    // Textarea validation to prevent spaces without alphabetic characters
+    ['activeProjects', 'repositories', 'accessCredentials', 'knowledgeBase', 'additionalAssets'].forEach(field => {
+        const textarea = document.getElementById(field);
+        if (textarea) {
+            textarea.addEventListener('input', function() {
+                // If no alphabetic characters, remove all spaces
+                if (!validations.hasAlphabeticChar(this.value)) {
+                    this.value = this.value.replace(/\s/g, '');
+                }
+            });
+        }
+    });
+
+    // Project documentation file type and size restrictions
+    projectDocsInput.addEventListener('change', function(e) {
+        const allowedTypes = [
+            'application/pdf', 
+            'application/msword', 
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 
+            'text/plain'
+        ];
+
+        Array.from(this.files).forEach(file => {
+            // Check file type
+            if (!allowedTypes.includes(file.type)) {
+                alert(`Invalid file type for ${file.name}. Allowed types: PDF, DOC, DOCX, TXT`);
+                this.value = ''; // Clear the input
+                return;
+            }
+
+            // Check file size (5MB limit)
+            if (file.size > 5 * 1024 * 1024) {
+                alert(`${file.name} exceeds 5MB limit`);
+                this.value = ''; // Clear the input
+                return;
+            }
+        });
+    });
+
+    // Dynamic last working day validation
+    lastDayInput.addEventListener('change', function() {
+        const selectedDate = new Date(this.value);
+        const today = new Date();
+        const maxDate = new Date(today);
+        
+        // Set max date to 3 months from today
+        maxDate.setMonth(today.getMonth() + 3);
+        
+        if (selectedDate <= today) {
+            alert('Please select a future date');
+            this.value = ''; // Clear the input
+        } else if (selectedDate > maxDate) {
+            alert('Last working day cannot be more than 3 months from today');
+            this.value = ''; // Clear the input
+        }
+    });
+
+    // Repositories and credentials textarea character limit visual feedback
+    ['repositories', 'accessCredentials', 'knowledgeBase', 'activeProjects', 'additionalAssets'].forEach(field => {
+    const textarea = document.getElementById(field);
+    if (textarea) {
+        // Create a container for positioning
+        const textareaContainer = document.createElement('div');
+        textareaContainer.style.position = 'relative';
+        textareaContainer.style.width = '100%';
+        
+        // Move the textarea into the container
+        textarea.parentNode.insertBefore(textareaContainer, textarea);
+        textareaContainer.appendChild(textarea);
+        
+        // Create character counter span
+        const charCounter = document.createElement('span');
+        charCounter.classList.add('char-counter');
+        charCounter.style.position = 'absolute';
+        charCounter.style.bottom = '5px';
+        charCounter.style.right = '10px';
+        charCounter.style.fontSize = '0.75em';
+        charCounter.style.color = '#666';
+        charCounter.style.pointerEvents = 'none'; // Prevents it from interfering with textarea interaction
+        charCounter.style.backgroundColor = 'rgba(255, 255, 255, 0.8)'; // Semi-transparent background
+        charCounter.style.padding = '2px 5px';
+        charCounter.style.borderRadius = '3px';
+        
+        textareaContainer.appendChild(charCounter);
+        
+        // Update character count display
+        function updateCharCount() {
+            const maxLength = parseInt(textarea.getAttribute('maxlength'));
+            const currentLength = textarea.value.length;
+            charCounter.textContent = `${currentLength}/${maxLength}`;
+            
+            // Change color based on remaining characters
+            if (currentLength > maxLength * 0.8) {
+                charCounter.style.color = '#e74c3c';
+            } else {
+                charCounter.style.color = '#666';
+            }
+        }
+        
+        // Initial count
+        updateCharCount();
+        
+        // Add event listeners to update count
+        textarea.addEventListener('input', updateCharCount);
+        textarea.addEventListener('focus', updateCharCount);
+        
+        // Adjust textarea padding to ensure text doesn't go under the counter
+        textarea.style.paddingBottom = '25px';
+    }
+});
+});
+</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Offboarding Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a69bd;
+            --secondary-color: #6a89cc;
+            --accent-color: #7ed6df;
+            --background-color: #f8f9fa;
+            --card-background: #ffffff;
+            --text-color: #2c3e50;
+            --soft-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --hover-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            --modal-bg-light: #f4f7f9;
+    --modal-text-primary: #2c3e50;
+    --modal-text-secondary: #34495e;
+    --modal-border-color: #e0e6ed;
+    --modal-accent-color: #3498db;
+    --modal-hover-color: #2980b9;
+    --modal-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -1000px 0; }
+            100% { background-position: 1000px 0; }
+        }
+
+        @keyframes noDataAnimation {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--background-color);
+            line-height: 1.6;
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .dashboard-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: var(--soft-shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg, 
+                transparent, 
+                rgba(255,255,255,0.2), 
+                transparent
+            );
+            animation: shimmer 2s infinite linear;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: -1px;
+        }
+
+        .no-records {
+            text-align: center;
+            padding: 50px;
+            background: var(--card-background);
+            border-radius: 15px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .no-records-icon {
+            font-size: 100px;
+            color: var(--secondary-color);
+            animation: noDataAnimation 1.5s infinite;
+            margin-bottom: 20px;
+        }
+
+        .filter-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            gap: 15px;
+            background: var(--card-background);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .filter-inputs {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .filter-section input, 
+        .filter-section select {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            background: #f9f9f9;
+            flex-grow: 1;
+        }
+
+        #clearRecordsBtn {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #clearRecordsBtn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .submissions-table {
+            background: var(--card-background);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--soft-shadow);
+        }
+
+        .submissions-table table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+        }
+
+        .submissions-table th, 
+        .submissions-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #f1f3f5;
+            transition: background-color 0.3s ease;
+        }
+
+        .submissions-table tr:hover {
+            background-color: #f8f9fa;
+        }
+
+        .submissions-table th {
+            background-color: #f1f3f5;
+            color: var(--text-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        .status-pending { 
+            color: #ff9f1a; 
+            font-weight: 600;
+        }
+        .status-approved { 
+            color: #2ecc71; 
+            font-weight: 600;
+        }
+        .status-rejected { 
+            color: #e74c3c; 
+            font-weight: 600;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            color: #aaa;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .close-btn:hover {
+            color: #e74c3c;
+        }
+
+        .modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 80%;
+    overflow: auto;
+    scrollbar-width: thin;
+    background-color: rgba(240, 242, 245, 0.8);
+    /* backdrop-filter: blur(5px); */
+    /* animation: modalFadeIn 0.4s ease-out; */
+    transform: translate(-50%, -50%); /* Centers the modal */
+}
+
+
+    @keyframes modalFadeIn {
+        from {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+
+    /* Modal Container Styles */
+    .modal-details-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+
+    /* Section Base Styles */
+    .modal-section {
+        background-color: #ffffff;
+        border-radius: 12px;
+        border: 1px solid #e9ecef;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        padding: 20px;
+        transition: all 0.3s ease;
+    }
+
+    .modal-section:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Section Header Styles */
+    .section-header {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        border-bottom: 2px solid #f1f3f5;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+    }
+
+    .section-header i {
+        color: #4a69bd;
+        font-size: 1.5rem;
+        width: 40px;
+        text-align: center;
+    }
+
+    .section-header h3 {
+        margin: 0;
+        color: #2c3e50;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    /* Section Content Styles */
+    .section-content {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f1f3f5;
+        transition: background-color 0.3s ease;
+    }
+
+    .detail-row:last-child {
+        border-bottom: none;
+    }
+
+    .detail-row:hover {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+    }
+
+    .detail-label {
+        color: #495057;
+        font-weight: 500;
+        flex: 1;
+        padding-right: 20px;
+    }
+
+    .detail-value {
+        color: #2c3e50;
+        font-weight: 600;
+        text-align: right;
+        flex: 1;
+        word-break: break-word;
+    }
+
+    /* Specific Section Styling */
+    .personal-info {
+        border-left: 4px solid #4a69bd;
+    }
+
+    .project-info {
+        border-left: 4px solid #2ecc71;
+        margin-top: 20px;
+    }
+
+    .documentation-info {
+        border-left: 4px solid #e74c3c;
+    }
+
+    /* Modal Actions */
+    .modal-actions {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #e9ecef;
+    }
+
+    .btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px 25px;
+        border-radius: 8px;
+        font-weight: 600;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+        border: none;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    .approve-btn, .reject-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .approve-btn {
+            background-color: #2ecc71;
+        }
+
+        .reject-btn {
+            background-color: #e74c3c;
+        }
+
+        header {
+    text-align: center;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f6f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    animation: headerFadeIn 1s ease-out;
+}
+
+header h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 2.0rem;
+    color: #1d51ff;
+    letter-spacing: 2px;
+    margin: 0;
+    animation: textSlideIn 1s ease-out;
+}
+
+/* Animation for fading in the header */
+@keyframes headerFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animation for sliding in the text */
+@keyframes textSlideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+        @media screen and (max-width: 768px) {
+            .dashboard-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .filter-section {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-inputs {
+                flex-direction: column;
+            }
+
+            .modal-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="dashboard-header">
+            <h1>HR - OFFBOARDING PORTAL</h1>
+        </div>
+        
+        <div class="filter-section">
+            <div class="filter-inputs">
+                <input type="text" id="searchInput" placeholder="Search Employee">
+                <select id="statusFilter">
+                    <option value="">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="Approved">Approved</option>
+                    <option value="Rejected">Rejected</option>
+                </select>
+                <input type="date" id="dateFilter">
+            </div>
+            <button id="clearRecordsBtn">
+                <i class="fas fa-trash-alt"></i> Clear Records
+            </button>
+        </div>
+
+        <div id="submissionsContainer" class="submissions-table">
+            <table id="submissionsTable">
+                <thead>
+                    <tr>
+                        <th>Submission ID</th>
+                        <th>Employee Name</th>
+                        <th>Department</th>
+                        <th>Last Working Day</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="submissionsBody">
+                    <!-- Submissions will be dynamically populated here -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const submissionsBody = document.getElementById('submissionsBody');
+        const submissionsContainer = document.getElementById('submissionsContainer');
+        const searchInput = document.getElementById('searchInput');
+        const statusFilter = document.getElementById('statusFilter');
+        const dateFilter = document.getElementById('dateFilter');
+        const clearRecordsBtn = document.getElementById('clearRecordsBtn');
+        const detailModal = document.getElementById('detailModal');
+        const modalContent = document.getElementById('modalContent');
+
+        let currentSubmissions = [];
+
+        function showNoRecordsMessage() {
+            submissionsContainer.innerHTML = `
+                <div class="no-records">
+                    <div class="no-records-icon">
+                        <i class="fas fa-folder-open"></i>
+                    </div>
+                    <h2>No Offboarding Submissions Found</h2>
+                    <p>There are currently no submissions in the system.</p>
+                </div>
+            `;
+        }
+
+        function loadSubmissions() {
+            const submissions = JSON.parse(localStorage.getItem('offboardingSubmissions') || '[]');
+            currentSubmissions = submissions;
+            
+            if (submissions.length === 0) {
+                showNoRecordsMessage();
+            } else {
+                renderSubmissions(submissions);
+            }
+        }
+
+        function renderSubmissions(submissions) {
+            submissionsContainer.innerHTML = `
+                <table id="submissionsTable">
+                    <thead>
+                        <tr>
+                            <th>Submission ID</th>
+                            <th>Employee Name</th>
+                            <th>Department</th>
+                            <th>Last Working Day</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="submissionsBody"></tbody>
+                </table>
+            `;
+            
+            const submissionsBody = document.getElementById('submissionsBody');
+            
+            submissions.forEach((submission, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${submission.submissionDetails.submissionId}</td>
+                    <td>${submission.personalInfo.fullName}</td>
+                    <td>${submission.personalInfo.department}</td>
+                    <td>${submission.personalInfo.lastDay}</td>
+                    <td class="status-${submission.submissionDetails.status.toLowerCase()}">
+                        ${submission.submissionDetails.status}
+                    </td>
+                    <td>
+                        <button class="action-btn" onclick="showDetails(${index})">
+                            View Details
+                        </button>
+                    </td>
+                `;
+                submissionsBody.appendChild(row);
+            });
+        }
+
+        function showCustomConfirm(message, onConfirm, onCancel) {
+            const confirmModal = document.createElement('div');
+            confirmModal.style.position = 'fixed';
+            confirmModal.style.top = '0';
+            confirmModal.style.left = '0';
+            confirmModal.style.width = '100%';
+            confirmModal.style.height = '100%';
+            confirmModal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            confirmModal.style.display = 'flex';
+            confirmModal.style.justifyContent = 'center';
+            confirmModal.style.alignItems = 'center';
+            confirmModal.style.zIndex = '2000';
+
+            confirmModal.innerHTML = `
+                <div style="background-color: white; padding: 30px; border-radius: 10px; text-align: center; max-width: 400px;">
+                    <h4 style="margin-bottom: 20px;">${message}</h4>
+                    <div style="display: flex; justify-content: center; gap: 20px;">
+                        <button id="confirmBtn" style="background-color: #3498db; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Confirm</button>
+                        <button id="cancelBtn" style="background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">Cancel</button>
+                    </div>
+                </div>
+            `;
+
+            document.body.appendChild(confirmModal);
+
+            const confirmBtn = confirmModal.querySelector('#confirmBtn');
+            const cancelBtn = confirmModal.querySelector('#cancelBtn');
+
+            confirmBtn.addEventListener('click', () => {
+                document.body.removeChild(confirmModal);
+                onConfirm();
+            });
+
+            cancelBtn.addEventListener('click', () => {
+                document.body.removeChild(confirmModal);
+                if (onCancel) onCancel();
+            });
+        }
+
+        window.showDetails = function(index) {
+            const submission = currentSubmissions[index];
+
+            let actionButtons = '';
+            if (submission.submissionDetails.status === 'Pending') {
+                actionButtons = `
+                    <div class="approve-reject-section">
+                        <button class="approve-btn" onclick="updateSubmissionStatus('Approved', ${index})">
+                            <i class="fas fa-check"></i> Approve
+                        </button>
+                        <button class="reject-btn" onclick="updateSubmissionStatus('Rejected', ${index})">
+                            <i class="fas fa-times"></i> Reject
+                        </button>
+                    </div>
+                `;
+            }
+
+            modalContent.innerHTML = `
+        <div class="modal-details-container">
+            <header>
+             <h2>OFFBOARDING SUBMISSION DETAILS</h2>
+            </header>
+            <div class="modal-grid">
+                <div class="modal-section personal-info">
+                    <div class="section-header">
+                        <i class="fas fa-user-circle"></i>
+                        <h3>Personal Information</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-row">
+                            <span class="detail-label">Full Name</span>
+                            <span class="detail-value">${submission.personalInfo.fullName}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Employee ID</span>
+                            <span class="detail-value">${submission.personalInfo.empId}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Department</span>
+                            <span class="detail-value">${submission.personalInfo.department}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Role</span>
+                            <span class="detail-value">${submission.personalInfo.position || 'Not Specified'}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Last Working Day</span>
+                            <span class="detail-value">${submission.personalInfo.lastDay}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Contact Number</span>
+                            <span class="detail-value">${submission.personalInfo.contactNumber}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Personal Email</span>
+                            <span class="detail-value">${submission.personalInfo.personalEmail}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-section project-info">
+                    <div class="section-header">
+                        <i class="fas fa-project-diagram"></i>
+                        <h3>Project Handover</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-row">
+                            <span class="detail-label">Active Projects</span>
+                            <span class="detail-value">${submission.projectDetails.activeProjects}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Handover Person</span>
+                            <span class="detail-value">${submission.projectDetails.handoverPerson}</span>
+                        </div>
+                    </div>
+
+                    <div class="section-header mt-3">
+                        <i class="fas fa-laptop"></i>
+                        <h3>Company Assets</h3>
+                    </div>
+                    <div class="section-content">
+                        <div class="detail-row">
+                            <span class="detail-label">Hardware</span>
+                            <span class="detail-value">${submission.assets.hardware.join(', ')}</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">Additional Assets</span>
+                            <span class="detail-value">${submission.assets.additionalAssets || 'None'}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-section documentation-info">
+                <div class="section-header">
+                    <i class="fas fa-folder-open"></i>
+                    <h3>Documentation</h3>
+                </div>
+                <div class="section-content">
+                    <div class="detail-row">
+                        <span class="detail-label">Repositories</span>
+                        <span class="detail-value">${submission.documentation.repositories}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Access Credentials</span>
+                        <span class="detail-value">${submission.documentation.accessCredentials}</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">Knowledge Base</span>
+                        <span class="detail-value">${submission.documentation.knowledgeBase}</span>
+                    </div>
+                </div>
+            </div>
+
+            ${actionButtons}
+        </div>
+    `;
+
+            detailModal.style.display = 'block';
+        }
+
+        window.updateSubmissionStatus = function(status, index) {
+            showCustomConfirm(
+                `Are you sure you want to ${status.toLowerCase()} this submission?`,
+                () => {
+                    const submissions = JSON.parse(localStorage.getItem('offboardingSubmissions') || '[]');
+                    submissions[index].submissionDetails.status = status;
+                    localStorage.setItem('offboardingSubmissions', JSON.stringify(submissions));
+                    
+                    // Reload submissions and close modal
+                    loadSubmissions();
+                    detailModal.style.display = 'none';
+                    
+                    // Show confirmation
+                    alert(`Submission has been ${status.toLowerCase()}.`);
+                },
+                () => {
+                    // Cancel action
+                }
+            );
+        }
+
+        // Close modal
+        document.querySelector('.close-btn').onclick = function() {
+            detailModal.style.display = 'none';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            if (event.target == detailModal) {
+                detailModal.style.display = 'none';
+            }
+        }
+
+        // Clear Records functionality
+        clearRecordsBtn.onclick = function() {
+            showCustomConfirm(
+                'Are you sure you want to clear all records? This action cannot be undone.',
+                () => {
+                    localStorage.removeItem('offboardingSubmissions');
+                    currentSubmissions = [];
+                    showNoRecordsMessage();
+                    alert('All records have been permanently cleared.');
+                },
+                () => {
+                    // Cancel action
+                }
+            );
+        }
+
+        // Filter submissions
+        function filterSubmissions() {
+            const searchTerm = searchInput.value.toLowerCase();
+            const statusTerm = statusFilter.value;
+            const dateTerm = dateFilter.value;
+
+            const filteredSubmissions = currentSubmissions.filter(submission => {
+                const nameMatch = submission.personalInfo.fullName.toLowerCase().includes(searchTerm);
+                const statusMatch = !statusTerm || submission.submissionDetails.status === statusTerm;
+                const dateMatch = !dateTerm || submission.personalInfo.lastDay === dateTerm;
+                
+                return nameMatch && statusMatch && dateMatch;
+            });
+
+            if (filteredSubmissions.length === 0) {
+                showNoRecordsMessage();
+            } else {
+                renderSubmissions(filteredSubmissions);
+            }
+        }
+
+        // Add event listeners for filtering
+        searchInput.addEventListener('input', filterSubmissions);
+        statusFilter.addEventListener('change', filterSubmissions);
+        dateFilter.addEventListener('change', filterSubmissions);
+
+        // Initial load
+        loadSubmissions();
+    });
+    </script>
+</body>
+</html>
